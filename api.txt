@@ -1,0 +1,4 @@
+https://dictionaryapi.dev
+
+example
+https://en.wiktionary.org/wiki/rice
