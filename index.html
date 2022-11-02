@@ -5,9 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="css/utilities.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>An api test!</h1>
+    <input type="text" id="word">
+    <button class="search-word-btn">Search word</button>
+
+    <h2 id="error-message" class="error"></h2>
+
+    <div class="word-info">
+        <h2 id="searched-word"></h2>
+        <h3 class="word-desc-title">phonetic</h3>
+        <p id="phonetic-text" class="word-desc-value"></p>
+        <audio controls id="phonetic-audio" class="word-desc-value">
+        </audio>
+        <h3 class="word-desc-title">Definitions and examples</h3>
+        <ul id="definitions" class="word-desc-value">
+
+        </ul>
+    </div>
     <script src="script.js"></script>
-</body>
+</body> 
 </html>

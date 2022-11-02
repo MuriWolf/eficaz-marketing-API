@@ -1,0 +1,19 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+    --red: rgb(168, 34, 34);
+}
+
+.error {
+    color: var(--red);
+}
+
+.word-desc-title {
+    margin-bottom: 0.25em;
+}
+
+.word-desc-value {
+    margin-top: 0;
+}
