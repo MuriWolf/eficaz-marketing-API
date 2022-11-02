@@ -9,22 +9,46 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <input type="text" id="word">
-    <button class="search-word-btn">Search word</button>
-
-    <h2 id="error-message" class="error"></h2>
-
-    <div class="word-info">
-        <h2 id="searched-word"></h2>
-        <h3 class="word-desc-title">phonetic</h3>
-        <p id="phonetic-text" class="word-desc-value"></p>
-        <audio controls id="phonetic-audio" class="word-desc-value">
-        </audio>
-        <h3 class="word-desc-title">Definitions and examples</h3>
-        <ul id="definitions" class="word-desc-value">
-
-        </ul>
-    </div>
+    <main class="container">
+        <h2 class="main-title">Find the meaning of the words!</h2>
+        <div class="input-area">
+            <input class="input" type="text" id="word" placeholder="Type a word...">
+            <button class="search-word-btn button">Search word</button>
+        </div>
+        <h2 id="error-message" class="error center"></h2>
+        <div class="word-info d-none">
+            <h1 id="searched-word" class="clr--blue"></h1>
+            <div class="word-desc-container ">
+                <h3 class="word-desc-title">phonetic</h3>
+                <p id="phonetic-text" class="word-desc-value"></p>
+                <audio controls id="phonetic-audio" class="word-desc-value">
+                </audio>
+            </div>
+            <div class="word-desc-container">
+                <h3 class="word-desc-title">Definitions and examples</h3>
+                <ul id="definitions" class="word-desc-value">
+                </ul>
+            </div>
+            <div class="word-desc-container">
+                <h3 class="word-desc-title">antonyms</h3>
+                <ul id="antonyms" class="word-desc-value">
+                </ul>
+            </div>
+            <div class="word-desc-container">
+                <h3 class="word-desc-title">synonyms</h3>
+                <ul id="synonyms" class="word-desc-value">
+                </ul>
+            </div>
+        </div>
+    </main> 
+    <footer class="footer">
+        <p>Desenvolvido por <strong>Murillo Pinheiro de Oliveira</strong></p>
+        <div class="footer-links">
+            <a href="https://github.com/MuriWolf" class="footer-link" target="_blank"><i class="fa-brands fa-github fa-2xl"></i></a>
+            <a href="https://www.linkedin.com/in/murillo-pinheiro-de-oliveira-2b931724a/" class="footer-link" target="_blank"><i class="fa-brands fa-linkedin fa-2xl"></i></i></a>
+        </div>
+    </footer>
+    <script src="https://kit.fontawesome.com/cbd566114a.js" crossorigin="anonymous"></script>
     <script src="script.js"></script>
 </body> 
 </html>

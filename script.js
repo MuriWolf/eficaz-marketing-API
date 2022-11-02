@@ -1,11 +1,17 @@
-const wordToSearch = document.querySelector("#word");
-const searchedWord = document.querySelector("#searched-word");
-const errorMessage = document.querySelector("#error-message")
-const phoneticText = document.querySelector("#phonetic-text")
-const phoneticAudio = document.querySelector("#phonetic-audio")
-const definitions = document.querySelector("#definitions")
-const wordInfo = document.querySelector(".word-info")
-const searchWordBtn = document.querySelector(".search-word-btn")
+function getEl(el) {
+	return document.querySelector(el);
+}
+
+const wordToSearch = getEl("#word")
+const searchedWord = getEl("#searched-word");
+const errorMessage = getEl("#error-message")
+const phoneticText = getEl("#phonetic-text")
+const phoneticAudio = getEl("#phonetic-audio")
+const definitions = getEl("#definitions")
+const antonyms = getEl("#antonyms")
+const synonyms = getEl("#synonyms")
+const wordInfo = getEl(".word-info")
+const searchWordBtn = getEl(".search-word-btn")
 
 searchWordBtn.addEventListener("click", () => {
 	searchWord(wordToSearch.value); 
@@ -16,33 +22,49 @@ async function searchWord(word) {
 	.then(response => response.json())
 	.then(response => {
 		handleError(false)
-		console.log(response)
-		searchedWord.textContent = response[0].word 
-		phoneticText.textContent = response[0].phonetics[0].text
+		clearDataList(synonyms, antonyms, definitions)
+		const data = response[0]
 
-		response[0].phonetics.forEach((element, i) => {
+		searchedWord.textContent = data.word 
+		
+		// add phonetic 
+		phoneticText.textContent = data.phonetics[0].text
+		data.phonetics.forEach((element, i) => {
 			if(element.audio != "") {
 				phoneticAudio.src = element.audio
 			}
 		});
-		while (definitions.hasChildNodes()) {
-			definitions.removeChild(definitions.firstChild);
-		}
-		response[0].meanings[0].definitions.forEach(element => {
-			let newEl = createEl(definitions, "li")
-			console.log(definitions);
-			newEl.textContent = element.definition + ` (${element.example})`
-			// console.log(element);
-		});
-	})
-	// .catch(err => {
-	// 	handleError(true)
-	// 	errorMessage.textContent = "Word not finded! Try type again.";
-	// });
-}
 
-// let newEl = createEl(wordInfo, "li")
-// newEl.textContent = "aijdiuas"
+		// add definitions
+		data.meanings[0].definitions.forEach(data => {
+			if (data.definition && data.example) {
+				definitions.parentElement.classList.remove("d-none")
+				let newEl = createEl(definitions, "li")
+				newEl.textContent = data.definition + ` Ex: (${data.example})`
+			}
+		});
+
+		// add antonyms
+		data.meanings[0].antonyms.forEach(data => {
+			antonyms.parentElement.classList.remove("d-none")
+			let newEl = createEl(antonyms, "li")
+			newEl.textContent = data	
+		});
+
+		// add synonyms
+		data.meanings[0].synonyms.forEach(data => {
+			synonyms.parentElement.classList.remove("d-none")
+			let newEl = createEl(synonyms, "li")
+			newEl.textContent = data	
+		});
+
+	})
+	.catch(err => {
+		console.log(err);
+		handleError(true)
+		errorMessage.textContent = "Word not finded! Try type again.";
+	});
+}
 
 function handleError(bool) {
 	if (bool === true) {
@@ -54,9 +76,18 @@ function handleError(bool) {
 	}
 }
  
-function createEl(father, el) {
-	console.log(father, el);
+function createEl(parent, el) {
 	let newEl = document.createElement(el)
-	father.appendChild(newEl)
+	parent.appendChild(newEl)
 	return newEl
+}
+
+function clearDataList(...elements) {
+	// Redefine todas as listas para branco, dessa maneira, quando uma nova palavra é pesquisada não há complito de dados.
+	for (const el of elements) {
+		while (el.hasChildNodes()) {
+			el.parentElement.classList.add("d-none")
+			el.removeChild(el.firstChild);
+		}
+	}
 }
